@@ -8,9 +8,8 @@ namespace Mogilino
 {
     public enum PreflopStrength
     {
-        Unplayable = 0,
-        NotRecommended = 1000,
-        Risky = 2000,
-        Recommended = 3000
+        Fold = 0,
+        Call = 1000,
+        Raise = 2000
     }
 }

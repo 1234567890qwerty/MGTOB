@@ -27,13 +27,12 @@ namespace Mogilino
             {
 
             }
-
             if (context.RoundType == GameRoundType.PreFlop)
             {
-                if (context.MoneyToCall < context.SmallBlind * 4)
+                if (context.MoneyToCall <= context.SmallBlind * 4)
                 {
                     var playHand = HandCheck.PreFlop(this.FirstCard, this.SecondCard);
-                    if (playHand == PreflopStrength.Unplayable)
+                    if (playHand == PreflopStrength.Fold)
                     {
                         if (context.CanCheck)
                         {
@@ -44,42 +43,33 @@ namespace Mogilino
                             return PlayerAction.Fold();
                         }
                     }
-                    else if (playHand == PreflopStrength.Recommended)
+                    else if (playHand == PreflopStrength.Raise)
                     {
-                        var smallBlindsTimes = RandomProvider.Next(4, 12);
-                        return PlayerAction.Raise(context.SmallBlind * smallBlindsTimes);
-                    }
-                    else if (playHand == PreflopStrength.Risky)
-                    {
-                        var chance = RandomProvider.Next(1, 10);
-                        if (chance < 6)
+                        var chance = RandomProvider.Next(0, 10);
+                        if (chance < 3)
                         {
                             return PlayerAction.CheckOrCall();
                         }
-                        else
+                        else if (chance >= 3 && chance < 7)
                         {
-                            var smallBlindsTimes = RandomProvider.Next(4, 8);
+                            var smallBlindsTimes = RandomProvider.Next(2, 6);
+                            return PlayerAction.Raise(context.SmallBlind * smallBlindsTimes);
+                        }
+                        else if (chance > 7)
+                        {
+                            var smallBlindsTimes = RandomProvider.Next(3, 8);
                             return PlayerAction.Raise(context.SmallBlind * smallBlindsTimes);
                         }
                     }
-                    else if (playHand == PreflopStrength.NotRecommended)
+                    else if (playHand == PreflopStrength.Call)
                     {
-                        var chance = RandomProvider.Next(1, 10);
-                        if (chance < 8)
-                        {
-                            return PlayerAction.CheckOrCall();
-                        }
-                        else
-                        {
-                            var smallBlindsTimes = RandomProvider.Next(4, 5);
-                            return PlayerAction.Raise(context.SmallBlind * smallBlindsTimes);
-                        }
+                        return PlayerAction.CheckOrCall();
                     }
                 }
                 else if (context.MoneyToCall > context.SmallBlind * 4 && context.MoneyToCall < context.SmallBlind * 10)
                 {
                     var playHand = HandCheck.PreFlop(this.FirstCard, this.SecondCard);
-                    if (playHand == PreflopStrength.Unplayable)
+                    if (playHand == PreflopStrength.Fold)
                     {
                         if (context.CanCheck)
                         {
@@ -90,7 +80,7 @@ namespace Mogilino
                             return PlayerAction.Fold();
                         }
                     }
-                    else if (playHand == PreflopStrength.Recommended)
+                    else if (playHand == PreflopStrength.Raise)
                     {
                         var chance = RandomProvider.Next(0, 10);
                         if (chance < 8)
@@ -103,52 +93,39 @@ namespace Mogilino
                             return PlayerAction.Raise(context.SmallBlind * smallBlindsTimes);
                         }
                     }
-                    else if (playHand == PreflopStrength.Risky)
+                    else if (playHand == PreflopStrength.Call)
                     {
-
-                        var chance = RandomProvider.Next(0, 10);
-                        if (chance < 8)
-                        {
-                            return PlayerAction.CheckOrCall();
-                        }
-                        else
-                        {
-                            return PlayerAction.Fold();
-                        }
+                        return PlayerAction.CheckOrCall();
                     }
-                    else if (playHand == PreflopStrength.NotRecommended)
-                    {
-                        var chance = RandomProvider.Next(1, 10);
-                        if (chance < 8)
-                        {
-                            return PlayerAction.CheckOrCall();
-                        }
-                        else
-                        {
-                            var smallBlindsTimes = RandomProvider.Next(4, 5);
-                            return PlayerAction.Raise(context.SmallBlind * smallBlindsTimes);
-                        }
-                    }
-
                     else if (context.MoneyToCall > context.SmallBlind * 10)
                     {
                         return PlayerAction.CheckOrCall();
                     }
                 }
-                else if (context.RoundType == GameRoundType.Flop)
+                else if (context.MoneyToCall > context.SmallBlind * 10)
                 {
-                    return PlayerAction.CheckOrCall();
-                }
-                else if (context.RoundType == GameRoundType.Turn)
-                {
-                    return PlayerAction.CheckOrCall();
-                }
-                else if (context.RoundType == GameRoundType.River)
-                {
-                    return PlayerAction.CheckOrCall();
+                    var playHand = HandCheck.PreFlop(this.FirstCard, this.SecondCard);
+                    if (this.FirstCard.Type == 12 && this.SecondCard.Type == 12)
+                    {
+                        return PlayerAction.CheckOrCall();
+                    }
                 }
 
+            }
+            else if (context.RoundType == GameRoundType.Flop)
+            {
                 return PlayerAction.CheckOrCall();
             }
+            else if (context.RoundType == GameRoundType.Turn)
+            {
+                return PlayerAction.CheckOrCall();
+            }
+            else if (context.RoundType == GameRoundType.River)
+            {
+                return PlayerAction.CheckOrCall();
+            }
+
+            return PlayerAction.CheckOrCall();
         }
     }
+}
