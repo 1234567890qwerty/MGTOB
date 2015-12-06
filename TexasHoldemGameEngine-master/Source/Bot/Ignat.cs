@@ -23,41 +23,6 @@ namespace Mogilino
             #region Preflop
             if (context.RoundType == GameRoundType.PreFlop)
             {
-                // if (!preflopCount.ContainsKey("allin"))
-                // {
-                //     preflopCount.Add("allin", 0);
-                // }
-                // 
-                // if (!preflopCount.ContainsKey("raise"))
-                // {
-                //     preflopCount.Add("raise", 0);
-                // }
-                // 
-                // if (!preflopCount.ContainsKey("check"))
-                // {
-                //     preflopCount.Add("check", 0);
-                // }
-                // 
-                // if (context.IsAllIn)
-                // {
-                //     preflopCount["allin"] = preflopCount["allin"] + 1;
-                // }
-                // 
-                // if (preflopCount["allin"] > 3 && probability > 0.65)
-                // {
-                //     return PlayerAction.Raise(context.CurrentMaxBet);
-                // }
-                // 
-                // if (context.RoundType == GameRoundType.PreFlop && context.MoneyToCall > 0)
-                // {
-                //     preflopCount["raise"] += 1;
-                // }
-                // 
-                // if (context.RoundType == GameRoundType.PreFlop && context.MoneyToCall == 0)
-                // {
-                //     preflopCount["call"] += 1;
-                // }
-
                 if (context.MoneyToCall <= context.SmallBlind * 4)
                 {
                    if (probability >= (double)context.MoneyToCall / (double)context.CurrentPot)
