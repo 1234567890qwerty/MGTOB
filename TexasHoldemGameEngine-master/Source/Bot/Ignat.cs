@@ -24,9 +24,9 @@ namespace Mogilino
             }
 
             preflopCount["allin"] = preflopCount["allin"] + 1;
-            if (preflopCount["allin"] > 3)
+            if (preflopCount["allin"] > 3 && probability > 0.5)
             {
-
+                return PlayerAction.CheckOrCall();
             }
             #region Preflop
             if (context.RoundType == GameRoundType.PreFlop)
@@ -104,13 +104,13 @@ namespace Mogilino
                         return PlayerAction.CheckOrCall();
                     }
                 }
-                else if (context.MoneyToCall > context.SmallBlind * 10)
+                else if (context.MoneyToCall > context.SmallBlind * 10 && probability > 0.6)
                 {
-                    // var playHand = HandCheck.PreFlop(this.FirstCard, this.SecondCard);
-                    // if (this.FirstCard.Type == 12 && this.SecondCard.Type == 12)
-                    // {
-                    //     return PlayerAction.CheckOrCall();
-                    // }
+                    return PlayerAction.CheckOrCall();
+                }
+                else
+                {
+                    return PlayerAction.Fold();
                 }
 
             }
