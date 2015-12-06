@@ -17,7 +17,6 @@ namespace Mogilino
 
         public override PlayerAction GetTurn(GetTurnContext context)
         {
-            
             double probability = MonteCarloHelper.GenerateProbabilty(this.FirstCard, this.SecondCard, this.CommunityCards);
             if (!preflopCount.ContainsKey("allin"))
             {
@@ -119,19 +118,40 @@ namespace Mogilino
             #region flop
             else if (context.RoundType == GameRoundType.Flop)
             {
-                return PlayerAction.CheckOrCall();
+                if (probability >= context.MoneyToCall / context.CurrentPot)
+                {
+                    return PlayerAction.CheckOrCall();
+                }
+                else
+                {
+                    return PlayerAction.Fold();
+                }                
             }
             #endregion
             #region turn
             else if (context.RoundType == GameRoundType.Turn)
             {
-                return PlayerAction.CheckOrCall();
+                if (probability >= context.MoneyToCall / context.CurrentPot)
+                {
+                    return PlayerAction.CheckOrCall();
+                }
+                else
+                {
+                    return PlayerAction.Fold();
+                }
             }
             #endregion
             #region River
             else if (context.RoundType == GameRoundType.River)
             {
-                return PlayerAction.CheckOrCall();
+                if (probability >= context.MoneyToCall / context.CurrentPot)
+                {
+                    return PlayerAction.CheckOrCall();
+                }
+                else
+                {
+                    return PlayerAction.Fold();
+                }
             }
             #endregion
             return PlayerAction.CheckOrCall();

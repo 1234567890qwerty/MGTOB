@@ -10,7 +10,7 @@ namespace Mogilino
 {
     public static class MonteCarloHelper
     {
-        public const double TotalGames = 10000;
+        public const double TotalGames = 1000;
         static HandEvaluator handEvaluator = new HandEvaluator();
         public static double GenerateProbabilty(Card myCardFirst, Card myCardSecond, IReadOnlyCollection<Card> communityCards)
         {
