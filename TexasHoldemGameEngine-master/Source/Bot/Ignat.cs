@@ -27,6 +27,7 @@ namespace Mogilino
             {
 
             }
+            #region Preflop
             if (context.RoundType == GameRoundType.PreFlop)
             {
                 if (context.MoneyToCall <= context.SmallBlind * 4)
@@ -112,19 +113,25 @@ namespace Mogilino
                 }
 
             }
+            #endregion
+            #region flop
             else if (context.RoundType == GameRoundType.Flop)
             {
                 return PlayerAction.CheckOrCall();
             }
+            #endregion
+            #region turn
             else if (context.RoundType == GameRoundType.Turn)
             {
                 return PlayerAction.CheckOrCall();
             }
+            #endregion
+            #region River
             else if (context.RoundType == GameRoundType.River)
             {
                 return PlayerAction.CheckOrCall();
             }
-
+            #endregion
             return PlayerAction.CheckOrCall();
         }
     }
