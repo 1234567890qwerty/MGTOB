@@ -10,7 +10,7 @@
     // TODO: This player is far far away from being smart!
     public class SmartPlayer : BasePlayer
     {
-        public override string Name { get; } = "SmartPlayer_" + Guid.NewGuid();
+        public override string Name { get; } = "SmartPlayer";
 
         public override PlayerAction GetTurn(GetTurnContext context)
         {

@@ -13,7 +13,7 @@ namespace Mogilino
         static Dictionary<string, int> preflopCount = new Dictionary<string, int>();
 
 
-        public override string Name { get; } = "Ignat_" + Guid.NewGuid();
+        public override string Name { get; } = "Ignat";
 
         public override PlayerAction GetTurn(GetTurnContext context)
         {

@@ -26,14 +26,21 @@
             var consolePlayer1 = new ConsoleUiDecorator(new Ignat(), 0, GameWidth, 5);
             var consolePlayer2 = new ConsoleUiDecorator(new SmartPlayer(), 6, GameWidth, 5);
 
-            var winners = new Dictionary<IPlayer,int>();
+            var winners = new Dictionary<string,int>();
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 50; i++)
             {
                 ITexasHoldemGame game = new TwoPlayersTexasHoldemGame(consolePlayer1, consolePlayer2);
                 var winner = game.Start();
+                if (!winners.ContainsKey(winner.Name))
+                {
+                    winners.Add(winner.Name, 1);
+                }
+                else
+                {
+                    winners[winner.Name]++;
 
-                winners[winner] += 1 ;
+                }
 
             }
 
