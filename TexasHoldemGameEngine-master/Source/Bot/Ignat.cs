@@ -17,6 +17,8 @@ namespace Mogilino
 
         public override PlayerAction GetTurn(GetTurnContext context)
         {
+            
+            double probability = MonteCarloHelper.GenerateProbabilty(this.FirstCard, this.SecondCard, this.CommunityCards);
             if (!preflopCount.ContainsKey("allin"))
             {
                 preflopCount.Add("allin", 0);
@@ -105,11 +107,11 @@ namespace Mogilino
                 }
                 else if (context.MoneyToCall > context.SmallBlind * 10)
                 {
-                    var playHand = HandCheck.PreFlop(this.FirstCard, this.SecondCard);
-                    if (this.FirstCard.Type == 12 && this.SecondCard.Type == 12)
-                    {
-                        return PlayerAction.CheckOrCall();
-                    }
+                    // var playHand = HandCheck.PreFlop(this.FirstCard, this.SecondCard);
+                    // if (this.FirstCard.Type == 12 && this.SecondCard.Type == 12)
+                    // {
+                    //     return PlayerAction.CheckOrCall();
+                    // }
                 }
 
             }

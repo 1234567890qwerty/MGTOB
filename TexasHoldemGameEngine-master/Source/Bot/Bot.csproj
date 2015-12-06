@@ -41,6 +41,8 @@
   <ItemGroup>
     <Compile Include="Ignat.cs" />
     <Compile Include="HandCheck.cs" />
+    <Compile Include="MonteCarloDeck.cs" />
+    <Compile Include="MonteCarloHelper.cs" />
     <Compile Include="PreflopStrength.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
