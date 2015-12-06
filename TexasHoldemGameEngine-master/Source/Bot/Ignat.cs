@@ -118,20 +118,20 @@ namespace Mogilino
             #region flop
             else if (context.RoundType == GameRoundType.Flop)
             {
-                if (probability >= context.MoneyToCall / context.CurrentPot)
+                if (probability >= (double)context.MoneyToCall / (double)context.CurrentPot)
                 {
                     return PlayerAction.CheckOrCall();
                 }
                 else
                 {
                     return PlayerAction.Fold();
-                }                
+                }
             }
             #endregion
             #region turn
             else if (context.RoundType == GameRoundType.Turn)
             {
-                if (probability >= context.MoneyToCall / context.CurrentPot)
+                if (probability >= (double)context.MoneyToCall / (double)context.CurrentPot)
                 {
                     return PlayerAction.CheckOrCall();
                 }
@@ -144,7 +144,7 @@ namespace Mogilino
             #region River
             else if (context.RoundType == GameRoundType.River)
             {
-                if (probability >= context.MoneyToCall / context.CurrentPot)
+                if (probability >= (double)context.MoneyToCall / (double)context.CurrentPot)
                 {
                     return PlayerAction.CheckOrCall();
                 }
