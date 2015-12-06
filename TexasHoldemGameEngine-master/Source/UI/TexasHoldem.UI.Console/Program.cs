@@ -7,6 +7,7 @@
     using TexasHoldem.Logic.GameMechanics;
     using Logic.Players;
     using System.Collections.Generic;
+    using System.IO;
 
     public static class Program
     {
@@ -26,7 +27,8 @@
             var consolePlayer1 = new ConsoleUiDecorator(new Ignat(), 0, GameWidth, 5);
             var consolePlayer2 = new ConsoleUiDecorator(new SmartPlayer(), 6, GameWidth, 5);
 
-            var winners = new Dictionary<string,int>();
+            
+            var winners = new Dictionary<string, int>();
 
             for (int i = 0; i < 50; i++)
             {
@@ -42,6 +44,20 @@
 
                 }
 
+            }
+
+            string user = "hans";
+
+            string path = @"C:\Users\" + user + @"\Desktop\statistics.txt";
+            using (StreamWriter sw = File.AppendText(path))
+            {
+                foreach (var item in winners)
+                {
+                    sw.Write(item.Key);
+                    sw.Write(" - ");
+                    sw.WriteLine(item.Value);
+                }
+                sw.WriteLine();
             }
 
         }
