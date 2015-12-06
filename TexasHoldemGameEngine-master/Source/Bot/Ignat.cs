@@ -11,6 +11,7 @@ namespace Mogilino
     public class Ignat : BasePlayer
     {
         static Dictionary<string, int> preflopCount = new Dictionary<string, int>();
+        static Dictionary<string, int> flopCount = new Dictionary<string, int>();
 
 
         public override string Name { get; } = "Ignat";
@@ -18,19 +19,45 @@ namespace Mogilino
         public override PlayerAction GetTurn(GetTurnContext context)
         {
             double probability = MonteCarloHelper.GenerateProbabilty(this.FirstCard, this.SecondCard, this.CommunityCards);
-            if (!preflopCount.ContainsKey("allin"))
-            {
-                preflopCount.Add("allin", 0);
-            }
 
-            preflopCount["allin"] = preflopCount["allin"] + 1;
-            if (preflopCount["allin"] > 3 && probability > 0.5)
-            {
-                return PlayerAction.CheckOrCall();
-            }
             #region Preflop
             if (context.RoundType == GameRoundType.PreFlop)
             {
+                // if (!preflopCount.ContainsKey("allin"))
+                // {
+                //     preflopCount.Add("allin", 0);
+                // }
+                // 
+                // if (!preflopCount.ContainsKey("raise"))
+                // {
+                //     preflopCount.Add("raise", 0);
+                // }
+                // 
+                // if (!preflopCount.ContainsKey("check"))
+                // {
+                //     preflopCount.Add("check", 0);
+                // }
+                // 
+                // if (context.IsAllIn)
+                // {
+                //     preflopCount["allin"] = preflopCount["allin"] + 1;
+                // }
+                // 
+                // if (preflopCount["allin"] > 3 && probability > 0.65)
+                // {
+                //     return PlayerAction.Raise(context.CurrentMaxBet);
+                // }
+                // 
+                // if (context.RoundType == GameRoundType.PreFlop && context.MoneyToCall > 0)
+                // {
+                //     preflopCount["raise"] += 1;
+                // }
+                // 
+                // if (context.RoundType == GameRoundType.PreFlop && context.MoneyToCall == 0)
+                // {
+                //     preflopCount["call"] += 1;
+                // }
+
                 if (context.MoneyToCall <= context.SmallBlind * 4)
                 {
                     var playHand = HandCheck.PreFlop(this.FirstCard, this.SecondCard);
@@ -99,10 +126,6 @@ namespace Mogilino
                     {
                         return PlayerAction.CheckOrCall();
                     }
-                    else if (context.MoneyToCall > context.SmallBlind * 10)
-                    {
-                        return PlayerAction.CheckOrCall();
-                    }
                 }
                 else if (context.MoneyToCall > context.SmallBlind * 10 && probability > 0.6)
                 {
@@ -118,22 +141,74 @@ namespace Mogilino
             #region flop
             else if (context.RoundType == GameRoundType.Flop)
             {
-                if (probability >= (double)context.MoneyToCall / (double)context.CurrentPot)
+                // if (!flopCount.ContainsKey("allin"))
+                // {
+                //     flopCount.Add("allin", 0);
+                // }
+                // 
+                // if (!flopCount.ContainsKey("raise"))
+                // {
+                //     flopCount.Add("raise", 0);
+                // }
+                // 
+                // if (context.MoneyToCall > 0)
+                // {
+                //     flopCount["raise"] += 1;
+                // }
+
+                if (context.MoneyToCall == 0 && probability >= (double)context.MoneyToCall / (double)context.CurrentPot)
                 {
-                    return PlayerAction.CheckOrCall();
+                    var chance = RandomProvider.Next(0, 10);
+                    if (chance < 8)
+                    {
+                        double lowBet = context.CurrentPot;
+                        var bet = RandomProvider.Next((int)(lowBet / 3), context.CurrentPot);
+                        return PlayerAction.Raise(bet);
+                    }
+                    else
+                    {
+                        return PlayerAction.CheckOrCall();
+                    }
                 }
-                else
+                else if (context.MoneyToCall > 0 && context.MoneyToCall < context.CurrentPot && probability >= (double)context.MoneyToCall / (double)context.CurrentPot)
                 {
-                    return PlayerAction.Fold();
+                    if (context.MoneyToCall == 0 && probability >= (double)context.MoneyToCall / (double)context.CurrentPot)
+                    {
+                        var chance = RandomProvider.Next(0, 10);
+                        if (chance < 8)
+                        {
+                            double lowBet = context.CurrentPot;
+                            var bet = RandomProvider.Next((int)(lowBet / 3), context.CurrentPot);
+                            return PlayerAction.Raise(bet);
+                        }
+                        else
+                        {
+                            return PlayerAction.CheckOrCall();
+                        }
+                    }
+                    else
+                    {
+                        return PlayerAction.Fold();
+                    }
                 }
-            }
+            } 
             #endregion
             #region turn
             else if (context.RoundType == GameRoundType.Turn)
             {
-                if (probability >= (double)context.MoneyToCall / (double)context.CurrentPot)
+                if (context.MoneyToCall == 0 && probability >= (double)context.MoneyToCall / (double)context.CurrentPot)
                 {
-                    return PlayerAction.CheckOrCall();
+                    var chance = RandomProvider.Next(0, 10);
+                    if (chance < 8)
+                    {
+                        double lowBet = context.CurrentPot;
+                        var bet = RandomProvider.Next((int)(lowBet / 3), context.CurrentPot);
+                        return PlayerAction.Raise(bet);
+                    }
+                    else
+                    {
+                        return PlayerAction.CheckOrCall();
+                    }
                 }
                 else
                 {
@@ -144,17 +219,27 @@ namespace Mogilino
             #region River
             else if (context.RoundType == GameRoundType.River)
             {
-                if (probability >= (double)context.MoneyToCall / (double)context.CurrentPot)
+                if (context.MoneyToCall == 0 && probability >= (double)context.MoneyToCall / (double)context.CurrentPot)
                 {
-                    return PlayerAction.CheckOrCall();
+                    var chance = RandomProvider.Next(0, 10);
+                    if (chance < 8)
+                    {
+                        double lowBet = context.CurrentPot;
+                        var bet = RandomProvider.Next((int)(lowBet / 3), context.CurrentPot);
+                        return PlayerAction.Raise(bet);
+                    }
+                    else
+                    {
+                        return PlayerAction.CheckOrCall();
+                    }
                 }
                 else
                 {
                     return PlayerAction.Fold();
                 }
             }
-            #endregion
-            return PlayerAction.CheckOrCall();
+                #endregion
+                return PlayerAction.CheckOrCall();
+            }
         }
     }
-}
