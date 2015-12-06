@@ -46,7 +46,7 @@
 
             }
 
-            string user = "hans";
+            string user = "Emil";
 
             string path = @"C:\Users\" + user + @"\Desktop\statistics.txt";
             using (StreamWriter sw = File.AppendText(path))

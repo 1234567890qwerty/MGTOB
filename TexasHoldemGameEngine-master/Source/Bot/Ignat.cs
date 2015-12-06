@@ -141,21 +141,6 @@ namespace Mogilino
             #region flop
             else if (context.RoundType == GameRoundType.Flop)
             {
-                // if (!flopCount.ContainsKey("allin"))
-                // {
-                //     flopCount.Add("allin", 0);
-                // }
-                // 
-                // if (!flopCount.ContainsKey("raise"))
-                // {
-                //     flopCount.Add("raise", 0);
-                // }
-                // 
-                // if (context.MoneyToCall > 0)
-                // {
-                //     flopCount["raise"] += 1;
-                // }
-
                 if (context.MoneyToCall == 0 && probability >= (double)context.MoneyToCall / (double)context.CurrentPot)
                 {
                     var chance = RandomProvider.Next(0, 10);
@@ -172,26 +157,34 @@ namespace Mogilino
                 }
                 else if (context.MoneyToCall > 0 && context.MoneyToCall < context.CurrentPot && probability >= (double)context.MoneyToCall / (double)context.CurrentPot)
                 {
-                    if (context.MoneyToCall == 0 && probability >= (double)context.MoneyToCall / (double)context.CurrentPot)
+                    var chance = RandomProvider.Next(0, 10);
+                    if (chance < 3)
                     {
-                        var chance = RandomProvider.Next(0, 10);
-                        if (chance < 8)
-                        {
-                            double lowBet = context.CurrentPot;
-                            var bet = RandomProvider.Next((int)(lowBet / 3), context.CurrentPot);
-                            return PlayerAction.Raise(bet);
-                        }
-                        else
-                        {
-                            return PlayerAction.CheckOrCall();
-                        }
+                        double lowBet = context.CurrentPot;
+                        var bet = RandomProvider.Next((int)(lowBet / 3), context.CurrentPot);
+                        return PlayerAction.Raise(bet);
                     }
-                    else
+                    else if (chance > 3 && chance < 8)
                     {
-                        return PlayerAction.Fold();
+                        return PlayerAction.CheckOrCall();
                     }
                 }
-            } 
+                else if (context.MoneyToCall > 0 && context.MoneyToCall < context.CurrentPot && probability >= (double)context.MoneyToCall / (double)context.CurrentPot)
+                {
+                    var chance = RandomProvider.Next(0, 10);
+                    if (chance < 3)
+                    {
+                        double lowBet = context.CurrentPot;
+                        var bet = RandomProvider.Next((int)(lowBet / 3), context.CurrentPot);
+                        return PlayerAction.Raise(bet);
+                    }
+                    else if (chance > 3 && chance < 8)
+                    {
+                        return PlayerAction.CheckOrCall();
+                    }
+                }
+
+            }
             #endregion
             #region turn
             else if (context.RoundType == GameRoundType.Turn)
@@ -238,8 +231,8 @@ namespace Mogilino
                     return PlayerAction.Fold();
                 }
             }
-                #endregion
-                return PlayerAction.CheckOrCall();
-            }
+            #endregion
+            return PlayerAction.CheckOrCall();
         }
     }
+}
