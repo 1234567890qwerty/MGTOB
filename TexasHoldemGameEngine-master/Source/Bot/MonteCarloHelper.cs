@@ -10,7 +10,7 @@ namespace Mogilino
 {
     public static class MonteCarloHelper
     {
-        public const double TotalGames = 10000;      
+        public const double TotalGames = 10000;
         static HandEvaluator handEvaluator = new HandEvaluator();
         public static double GenerateProbabilty(Card myCardFirst, Card myCardSecond, IReadOnlyCollection<Card> communityCards)
         {
@@ -35,6 +35,7 @@ namespace Mogilino
                 {
                     monteCarloCommunityCards.Add(monteCarloDeck.GetNextCard());
                 }
+
                 List<Card> ourHandForEavluation = new List<Card>();
                 ourHandForEavluation.Add(myCardFirst);
                 ourHandForEavluation.Add(myCardSecond);
