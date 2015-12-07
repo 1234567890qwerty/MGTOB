@@ -41,7 +41,7 @@
   <ItemGroup>
     <Compile Include="Contracts\IBrainHelper.cs" />
     <Compile Include="Ignat.cs" />
-    <Compile Include="IgnatBrainHelper.cs" />
+    <Compile Include="Helpers\IgnatBrainHelper.cs" />
     <Compile Include="MonteCarlo\MonteCarloDeck.cs" />
     <Compile Include="MonteCarlo\MonteCarloHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

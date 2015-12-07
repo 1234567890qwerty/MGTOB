@@ -1,4 +1,4 @@
-﻿namespace Mogilino
+﻿namespace Mogilino.Helpers
 {
     using Contracts;
     using TexasHoldem.Logic.Players;
