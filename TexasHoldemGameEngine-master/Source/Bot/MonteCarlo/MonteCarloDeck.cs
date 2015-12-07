@@ -1,4 +1,4 @@
-﻿namespace Mogilino
+﻿namespace Mogilino.MonteCarlo
 {
     using System.Collections.Generic;
     using System.Linq;

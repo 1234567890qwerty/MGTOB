@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TexasHoldem.Logic.Cards;
-using TexasHoldem.Logic.Helpers;
-
-namespace Mogilino
+﻿namespace Mogilino.MonteCarlo
 {
+    using System.Collections.Generic;
+    using TexasHoldem.Logic.Cards;
+    using TexasHoldem.Logic.Helpers;
+
     public static class MonteCarloHelper
     {
         public const double TotalGames = 1000;

@@ -1,11 +1,12 @@
 ﻿namespace TexasHoldem.UI.Console
 {
-    using Mogilino;
     using System;
 
     using TexasHoldem.AI.SmartPlayer;
+    using TexasHoldem.AI.DummyPlayer;
     using TexasHoldem.Logic.GameMechanics;
     using Logic.Players;
+    using Mogilino;
     using System.Collections.Generic;
     using System.IO;
 
@@ -27,7 +28,6 @@
             var consolePlayer1 = new ConsoleUiDecorator(new Ignat(), 0, GameWidth, 5);
             var consolePlayer2 = new ConsoleUiDecorator(new SmartPlayer(), 6, GameWidth, 5);
 
-            
             var winners = new Dictionary<string, int>();
 
             for (int i = 0; i < 50; i++)
@@ -41,12 +41,11 @@
                 else
                 {
                     winners[winner.Name]++;
-
                 }
 
             }
 
-            string user = "Emil";
+            string user = "hans";
 
             string path = @"C:\Users\" + user + @"\Desktop\statistics.txt";
             using (StreamWriter sw = File.AppendText(path))

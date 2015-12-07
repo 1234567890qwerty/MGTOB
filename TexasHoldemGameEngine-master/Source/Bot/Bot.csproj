@@ -39,11 +39,11 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IBrainHelper.cs" />
     <Compile Include="Ignat.cs" />
-    <Compile Include="HandCheck.cs" />
-    <Compile Include="MonteCarloDeck.cs" />
-    <Compile Include="MonteCarloHelper.cs" />
-    <Compile Include="PreflopStrength.cs" />
+    <Compile Include="IgnatBrainHelper.cs" />
+    <Compile Include="MonteCarlo\MonteCarloDeck.cs" />
+    <Compile Include="MonteCarlo\MonteCarloHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
