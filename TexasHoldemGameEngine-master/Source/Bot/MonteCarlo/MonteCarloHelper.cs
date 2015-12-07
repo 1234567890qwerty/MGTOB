@@ -7,7 +7,8 @@
     public static class MonteCarloHelper
     {
         public const double TotalGames = 1000;
-        static HandEvaluator handEvaluator = new HandEvaluator();
+        private static HandEvaluator handEvaluator = new HandEvaluator();
+
         public static double GenerateProbabilty(Card myCardFirst, Card myCardSecond, IReadOnlyCollection<Card> communityCards)
         {
             var cardsForRemoving = new List<Card>();

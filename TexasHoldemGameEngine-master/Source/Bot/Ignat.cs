@@ -1,5 +1,6 @@
 ﻿namespace Mogilino
 {
+    using System;
     using Contracts;
     using Helpers;
     using MonteCarlo;
@@ -23,19 +24,19 @@
 
             if (context.RoundType == GameRoundType.PreFlop)
             {
-                return this.BrainHelper.BasedOnProbabilityDecision(probability, context);
+                return this.BrainHelper.PlayerActionDecision(probability, context);
             }
             else if (context.RoundType == GameRoundType.Flop)
             {
-                return this.BrainHelper.BasedOnProbabilityDecision(probability, context);
+                return this.BrainHelper.PlayerActionDecision(probability, context);
             }
             else if (context.RoundType == GameRoundType.Turn)
             {
-                return this.BrainHelper.BasedOnProbabilityDecision(probability, context);
+                return this.BrainHelper.PlayerActionDecision(probability, context);
             }
             else if (context.RoundType == GameRoundType.River)
             {
-                return this.BrainHelper.BasedOnProbabilityDecision(probability, context);
+                return this.BrainHelper.PlayerActionDecision(probability, context);
             }
 
             return PlayerAction.CheckOrCall();

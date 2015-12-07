@@ -4,9 +4,9 @@
 
     using TexasHoldem.Logic.Players;
 
-    internal class AlwaysAllInDummyPlayer : BasePlayer
+    public class AlwaysAllInDummyPlayer : BasePlayer
     {
-        public override string Name { get; } = "AlwaysAllInDummyPlayer_" + Guid.NewGuid();
+        public override string Name { get; } = "AlwaysAllInDummyPlayer";
 
         public override PlayerAction GetTurn(GetTurnContext context)
         {

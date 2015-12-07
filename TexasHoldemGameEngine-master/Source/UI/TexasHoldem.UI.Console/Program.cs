@@ -30,7 +30,7 @@
 
             var winners = new Dictionary<string, int>();
 
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 100; i++)
             {
                 ITexasHoldemGame game = new TwoPlayersTexasHoldemGame(consolePlayer1, consolePlayer2);
                 var winner = game.Start();

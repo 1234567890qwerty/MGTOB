@@ -5,38 +5,27 @@
 
     public class IgnatBrainHelper : IBrainHelper
     {
-        private const double AllInProbability = 0.95;
-        private const double HalfMoneyAllInProbability = 0.85;
-        private const double RaiseNumberProbability = 0.75;
-        private const double SmallRaiseProbability = 0.65;
-        private const double CheckCallProbability = 0.5;
+        public PlayerAction PlayerAction { get; set; }
 
-        public PlayerAction BasedOnProbabilityDecision(double probability, GetTurnContext context)
+        public PlayerAction PlayerActionDecision(double probability, GetTurnContext context)
         {
-            if (probability >= AllInProbability)
-            {
-                return PlayerAction.Raise(context.MoneyLeft);
-            }
-            else if (probability >= HalfMoneyAllInProbability)
-            {
-                return PlayerAction.Raise(context.MoneyLeft / 2);
-            }
-            else if (probability >= HalfMoneyAllInProbability)
-            {
-                return PlayerAction.Raise(context.CurrentPot);
-            }
-            else if (probability >= SmallRaiseProbability)
-            {
-                return PlayerAction.Raise(context.CurrentPot/2);
-            }
-            else if (probability >= CheckCallProbability)
-            {
-                return PlayerAction.CheckOrCall();
-            }
-            else
-            {
-                return PlayerAction.Fold();
-            }
+            AllInDecision allIn = new AllInDecision();
+            HalfMoneyIn halfMoneyIn = new HalfMoneyIn();
+            RaiseDecision raise = new RaiseDecision();
+            SmallRaiseDecision smallRaise = new SmallRaiseDecision();
+            CheckCallDecision checkCall = new CheckCallDecision();
+            BadLuckDecision badLuck = new BadLuckDecision();
+
+            allIn.SetSuccessor(halfMoneyIn);
+            halfMoneyIn.SetSuccessor(raise);
+            raise.SetSuccessor(smallRaise);
+            smallRaise.SetSuccessor(checkCall);
+            checkCall.SetSuccessor(badLuck);
+
+
+            allIn.BasedOnProbabilityDecision(probability, context, this);
+
+            return this.PlayerAction;
         }
     }
 }

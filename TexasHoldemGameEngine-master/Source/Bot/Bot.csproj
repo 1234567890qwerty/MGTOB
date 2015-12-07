@@ -39,7 +39,15 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Constant\ProbabiltyDecisionConstants.cs" />
     <Compile Include="Contracts\IBrainHelper.cs" />
+    <Compile Include="Helpers\AllInDecision.cs" />
+    <Compile Include="Helpers\BadLuckDecision.cs" />
+    <Compile Include="Helpers\CheckCallDecision.cs" />
+    <Compile Include="Helpers\Decision.cs" />
+    <Compile Include="Helpers\HalfMoneyIn.cs" />
+    <Compile Include="Helpers\RaiseDecision.cs" />
+    <Compile Include="Helpers\SmallRaiseDecision.cs" />
     <Compile Include="Ignat.cs" />
     <Compile Include="Helpers\IgnatBrainHelper.cs" />
     <Compile Include="MonteCarlo\MonteCarloDeck.cs" />

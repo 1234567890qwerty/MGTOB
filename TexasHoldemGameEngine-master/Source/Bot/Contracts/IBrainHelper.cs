@@ -4,6 +4,8 @@
 
     public interface IBrainHelper
     {
-        PlayerAction BasedOnProbabilityDecision(double probability, GetTurnContext context);
+        PlayerAction PlayerAction { get; set; }
+
+        PlayerAction PlayerActionDecision(double probability, GetTurnContext context);
     }
 }
