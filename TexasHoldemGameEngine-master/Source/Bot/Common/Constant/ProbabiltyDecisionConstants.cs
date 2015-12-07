@@ -7,6 +7,5 @@
         public const double Raise = 0.75;
         public const double SmallRaise = 0.65;
         public const double CheckCall = 0.5;
-
     }
 }

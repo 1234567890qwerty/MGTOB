@@ -9,7 +9,8 @@
 
     public class Ignat : BasePlayer
     {
-        public Ignat() : base()
+        public Ignat()
+            : base()
         {
             this.BrainHelper = new IgnatBrainHelper();
         }
@@ -22,24 +23,17 @@
         {
             double probability = MonteCarloHelper.GenerateProbabilty(this.FirstCard, this.SecondCard, this.CommunityCards);
 
-            if (context.RoundType == GameRoundType.PreFlop)
+            if (context.RoundType == GameRoundType.PreFlop
+                || context.RoundType == GameRoundType.Flop
+                || context.RoundType == GameRoundType.Turn
+                || context.RoundType == GameRoundType.River)
             {
                 return this.BrainHelper.PlayerActionDecision(probability, context);
             }
-            else if (context.RoundType == GameRoundType.Flop)
+            else
             {
-                return this.BrainHelper.PlayerActionDecision(probability, context);
+                return PlayerAction.CheckOrCall();
             }
-            else if (context.RoundType == GameRoundType.Turn)
-            {
-                return this.BrainHelper.PlayerActionDecision(probability, context);
-            }
-            else if (context.RoundType == GameRoundType.River)
-            {
-                return this.BrainHelper.PlayerActionDecision(probability, context);
-            }
-
-            return PlayerAction.CheckOrCall();
         }
     }
 }

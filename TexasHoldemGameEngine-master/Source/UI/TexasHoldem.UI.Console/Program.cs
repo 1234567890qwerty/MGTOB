@@ -42,7 +42,6 @@
                 {
                     winners[winner.Name]++;
                 }
-
             }
 
             string user = "hans";
@@ -56,6 +55,7 @@
                     sw.Write(" - ");
                     sw.WriteLine(item.Value);
                 }
+
                 sw.WriteLine();
             }
 

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Mogilino.Common.Constant;
-using Mogilino.Contracts;
-using TexasHoldem.Logic.Players;
-
-namespace Mogilino.Helpers
+﻿namespace Mogilino.Helpers
 {
+    using Common.Constant;
+    using Contracts;
+    using TexasHoldem.Logic.Players;
+
     internal class HalfMoneyIn : Decision
     {
         public override void BasedOnProbabilityDecision(double probability, GetTurnContext context, IBrainHelper brainHelper)

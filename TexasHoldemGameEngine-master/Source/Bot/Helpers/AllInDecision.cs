@@ -14,7 +14,7 @@
             }
             else if (this.Successor != null)
             {
-                this.Successor.BasedOnProbabilityDecision(probability,context,brainHelper);
+                this.Successor.BasedOnProbabilityDecision(probability, context, brainHelper);
             }
         }
     }

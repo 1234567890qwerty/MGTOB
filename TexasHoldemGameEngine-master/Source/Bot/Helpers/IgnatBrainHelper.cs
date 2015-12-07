@@ -22,7 +22,6 @@
             smallRaise.SetSuccessor(checkCall);
             checkCall.SetSuccessor(badLuck);
 
-
             allIn.BasedOnProbabilityDecision(probability, context, this);
 
             return this.PlayerAction;
