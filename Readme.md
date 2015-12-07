@@ -3,11 +3,10 @@
 Team members:
   - Andrei Boyadjiev
   - Mihaela Ivanova
-  - Emil Tishinov
-- - - -<br/>
+  - Emil Tishinov<br/>
 The algorithm of the both is called every time when a decision should be made. A random deck is created and then cards are drawn. This is repeated 1000 times to achieve maximal probability of the expected result. After iterating 1000 times over random results the percentage of the winning cases is taken and returned to the both decision making part. This techique is called Monte Carlo Algorithm <br/>
 ## Monte Carlo Algorithm
-=============================================<br/>
+=============================================
 1. Monte Carlo simulation: a simulation is a fictitious representation of reality,<br/>
 a Monte Carlo method is a technique that can be used to solve a mathematical or statistical problem, and a Monte Carlo simulation uses repeated sampling <br/>
 to determine the properties of some phenomenon (or behavior). Examples
@@ -55,7 +54,7 @@ For this part of the poker bot the design pattern chain of responsibility is use
         public abstract void BasedOnProbabilityDecision(double probability, GetTurnContext context, IBrainHelper brainHelper);
     }
 ~~~
-The chain of responsibility goes this way:
+The chain of responsibility goes this way:<br/>
 AllInDecision --><br/>  
 HalfMoneyIn --><br/> 
 RaiseDecision --> <br/>
